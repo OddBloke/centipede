@@ -1,11 +1,11 @@
 from mock import Mock, patch
 from nose.tools import assert_equal
 
-from centipede.ui.tickets.views import view_ticket
+from centipede_ui.tickets.views import view_ticket
 
 
-@patch('centipede.ui.tickets.views.render_to_response')
-@patch('centipede.ui.tickets.views.Centipede')
+@patch('centipede_ui.tickets.views.render_to_response')
+@patch('centipede_ui.tickets.views.Centipede')
 def test_view_ticket(centipede, render_to_response):
     centipede.return_value.get_ticket.return_value = {
         'title': 'MockTitle',

@@ -85,7 +85,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'ui.urls'
+ROOT_URLCONF = 'centipede_ui.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
-    'ui.tickets',
+    'centipede_ui.tickets',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

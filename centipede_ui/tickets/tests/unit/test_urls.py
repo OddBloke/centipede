@@ -1,7 +1,7 @@
 from django.core.urlresolvers import resolve
 from nose.tools import assert_equal
 
-from centipede.ui.tickets import views
+from centipede_ui.tickets import views
 
 
 def test_view_ticket():

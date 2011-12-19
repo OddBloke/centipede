@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 
-from centipede.ui.centipedelib import Centipede
+from centipede_ui.centipedelib import Centipede
 
 
 def view_ticket(request, ticket_id):
