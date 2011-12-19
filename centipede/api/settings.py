@@ -147,3 +147,5 @@ LOGGING = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+TRACKER = 'centipede.plugins.rally.Rally'
