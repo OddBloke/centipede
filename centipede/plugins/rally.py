@@ -1,7 +1,7 @@
 from pyrally import RallyAPIClient, settings as rally_settings
 
 from centipede.models import Ticket
-from centipede.plugins import PluginInterface
+from centipede.tracker import TrackerInterface
 
 
 def get_ticket_from_rally_object(rally_obj):
@@ -16,7 +16,7 @@ def get_ticket_from_rally_object(rally_obj):
         )
 
 
-class Rally(PluginInterface):
+class Rally(TrackerInterface):
 
     def get(self, ticket_id):
         client = RallyAPIClient(rally_settings.RALLY_USERNAME,
