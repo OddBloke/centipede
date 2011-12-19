@@ -1,4 +1,4 @@
-from pyrally.client import RallyAPIClient
+from pyrally import RallyAPIClient
 
 from centipede.models import Ticket
 from centipede.plugins import PluginInterface
