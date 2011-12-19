@@ -1,10 +1,17 @@
 from github2 import client
 
 from centipede.tracker import TrackerInterface
+from centipede.tracker.entities import Ticket
 
 
-def get_ticket_from_issue():
-    pass
+def get_ticket_from_issue(issue):
+    return Ticket(
+        identifier=issue.number,
+        description=issue.body,
+        title=issue.title,
+        owner=None,
+        state=issue.state,
+    )
 
 
 class GitHub(TrackerInterface):
