@@ -1,7 +1,7 @@
 from mock import patch
 from nose.tools import assert_equal
 
-from ui.centipedelib import Centipede
+from centipede.ui.centipedelib import Centipede
 
 
 @patch('ui.centipedelib.json.loads')
