@@ -1,7 +1,7 @@
-from mock import patch
+from mock import Mock, patch
 from nose.tools import assert_equal
 
-from centipede.plugins.rally import Rally
+from centipede.plugins.rally import get_ticket_from_rally_object, Rally
 
 
 def assert_called_once(mock_obj, expected_args=None, expected_kwargs=None):
@@ -13,6 +13,23 @@ def assert_called_once(mock_obj, expected_args=None, expected_kwargs=None):
     args, kwargs = mock_obj.call_args
     assert_equal(expected_args, args)
     assert_equal(expected_kwargs, kwargs)
+
+
+@patch('centipede.plugins.rally.Ticket')
+def test_get_ticket_from_rally_object(ticket):
+    mock_rally_obj = Mock()
+    mock_rally_obj.Description = 'MockDescription'
+    mock_rally_obj.name = 'MockTitle'
+    mock_rally_obj.user.DisplayName = 'Mock User'
+    mock_rally_obj.ScheduleState = 'Completed'
+    ret = get_ticket_from_rally_object(mock_rally_obj)
+    assert_called_once(ticket, (), {
+        'description': 'MockDescription',
+        'title': 'MockTitle',
+        'owner': 'Mock User',
+        'state': 'Completed',
+    })
+    assert_equal(ret, ticket.return_value)
 
 
 @patch('centipede.plugins.rally.get_ticket_from_rally_object')
