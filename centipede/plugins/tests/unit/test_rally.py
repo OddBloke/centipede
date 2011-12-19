@@ -94,4 +94,4 @@ def test_list_children_entity_with_both(api_client,
     get_entity_by_name.return_value.tasks = [4, 5, 6]
     ret = rally.list_children('us123')
     assert_called_once(get_entity_by_name, ('us123',))
-    assert_equal([101, 102, 103, 104, 105, 106], ret)
+    assert_equal(set([101, 102, 103, 104, 105, 106]), set(ret))
