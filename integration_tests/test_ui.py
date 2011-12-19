@@ -12,3 +12,10 @@ def test_ui():
                    'I need to be able to change']:
         assert_true(string in response.content,
                     '"{0}" not on page.'.format(string))
+
+
+def test_tasks():
+    response = requests.get('http://127.0.0.1:8001/tickets/view/TA62/')
+    for string in ['Document steps', 'Phil O', 'Completed']:
+        assert_true(string in response.content,
+                    '"{0}" not on page.'.format(string))
