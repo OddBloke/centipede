@@ -1,6 +1,7 @@
 from mock import Mock, patch
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_raises
 
+from centipede.tracker.entities import IAmSterile
 from centipede.plugins.rally import get_ticket_from_rally_object, Rally
 
 
@@ -117,6 +118,5 @@ def test_list_children_task(api_client, get_ticket_from_rally_object):
     get_ticket_from_rally_object.side_effect = lambda x: x + 100
     get_entity_by_name = api_client.return_value.get_entity_by_name
     get_entity_by_name.return_value = Mock([])
-    ret = rally.list_children('ta123')
+    assert_raises(IAmSterile, rally.list_children, 'ta123')
     assert_called_once(get_entity_by_name, ('ta123',))
-    assert_equal([], ret)
