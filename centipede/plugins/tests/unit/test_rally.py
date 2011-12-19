@@ -18,12 +18,14 @@ def assert_called_once(mock_obj, expected_args=None, expected_kwargs=None):
 @patch('centipede.plugins.rally.Ticket')
 def test_get_ticket_from_rally_object(ticket):
     mock_rally_obj = Mock()
+    mock_rally_obj.FormatedId = 'Mock Identifier'
     mock_rally_obj.Description = 'MockDescription'
     mock_rally_obj.Name = 'MockTitle'
     mock_rally_obj.Owner.DisplayName = 'Mock User'
     mock_rally_obj.ScheduleState = 'Completed'
     ret = get_ticket_from_rally_object(mock_rally_obj)
     assert_called_once(ticket, (), {
+        'identifier': 'Mock Identifier',
         'description': 'MockDescription',
         'title': 'MockTitle',
         'owner': 'Mock User',
@@ -43,9 +45,9 @@ def test_get_ticket_from_rally_object_no_owner(ticket):
 
 @patch('centipede.plugins.rally.get_ticket_from_rally_object')
 @patch('centipede.plugins.rally.RallyAPIClient')
-def test_rally_get(api_client, get_ticket_from_rally_object):
+def test_rally_get_ticket(api_client, get_ticket_from_rally_object):
     rally = Rally()
-    ret = rally.get('us123')
+    ret = rally.get_ticket('us123')
     get_entity_by_name = api_client.return_value.get_entity_by_name
     assert_called_once(get_entity_by_name, ('us123',))
     assert_called_once(get_ticket_from_rally_object,
