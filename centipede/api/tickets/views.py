@@ -19,6 +19,6 @@ class TicketView(View):
         data = dict(
             title=ticket.title,
             description=ticket.description,
-            status=ticket.state,
+            state=ticket.state,
             owner=ticket.owner)
         return HttpResponse(self.serialize(data))
