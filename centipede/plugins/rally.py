@@ -1,7 +1,7 @@
 from pyrally import RallyAPIClient, settings as rally_settings
 
 from centipede.tracker import TrackerInterface
-from centipede.tracker.entities import Ticket
+from centipede.tracker.entities import IAmSterile, Ticket
 
 
 def get_ticket_from_rally_object(rally_obj):
@@ -29,6 +29,8 @@ class Rally(TrackerInterface):
 
     def list_children(self, ticket_id):
         ticket = self.client.get_entity_by_name(ticket_id)
+        if not (hasattr(ticket, 'children') or hasattr(ticket, 'tasks')):
+            raise IAmSterile(ticket)
         try:
             children = [get_ticket_from_rally_object(child)
                             for child in ticket.children]
