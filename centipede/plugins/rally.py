@@ -29,7 +29,10 @@ class Rally(TrackerInterface):
 
     def list_children(self, ticket_id):
         ticket = self.client.get_entity_by_name(ticket_id)
-        children = [get_ticket_from_rally_object(child)
-                        for child in ticket.children]
+        try:
+            children = [get_ticket_from_rally_object(child)
+                            for child in ticket.children]
+        except AttributeError:
+            children = []
         tasks = [get_ticket_from_rally_object(task) for task in ticket.tasks]
         return children + tasks
