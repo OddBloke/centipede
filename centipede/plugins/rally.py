@@ -9,7 +9,7 @@ def get_ticket_from_rally_object(rally_obj):
     if owner is not None:
         owner = owner.DisplayName
     return Ticket(
-            identifier=rally_obj.FormatedId,
+            identifier=rally_obj.FormattedId,
             description=rally_obj.Description,
             title=rally_obj.Name,
             owner=owner,
