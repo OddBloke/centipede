@@ -63,6 +63,21 @@ def test_list_children_story_with_only_children(api_client,
     get_ticket_from_rally_object.side_effect = lambda x: x + 100
     get_entity_by_name = api_client.return_value.get_entity_by_name
     get_entity_by_name.return_value.children = [1, 2, 3]
+    get_entity_by_name.return_value.tasks = []
+    ret = rally.list_children('us123')
+    assert_called_once(get_entity_by_name, ('us123',))
+    assert_equal([101, 102, 103], ret)
+
+
+@patch('centipede.plugins.rally.get_ticket_from_rally_object')
+@patch('centipede.plugins.rally.RallyAPIClient')
+def test_list_children_entity_with_only_tasks(api_client,
+                                              get_ticket_from_rally_object):
+    rally = Rally()
+    get_ticket_from_rally_object.side_effect = lambda x: x + 100
+    get_entity_by_name = api_client.return_value.get_entity_by_name
+    get_entity_by_name.return_value.children = []
+    get_entity_by_name.return_value.tasks = [1, 2, 3]
     ret = rally.list_children('us123')
     assert_called_once(get_entity_by_name, ('us123',))
     assert_equal([101, 102, 103], ret)
