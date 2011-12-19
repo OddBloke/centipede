@@ -1,10 +1,7 @@
 from pyrally.client import RallyAPIClient
 
+from centipede.models import Ticket
 from centipede.plugins import PluginInterface
-
-
-class Ticket(object):
-    pass
 
 
 def get_ticket_from_rally_object(rally_obj):
