@@ -1,7 +1,7 @@
-from mock import patch
+from mock import Mock, patch
 from nose.tools import assert_equal
 
-from centipede.plugins.github import GitHub
+from centipede.plugins.github import get_ticket_from_issue, GitHub
 from centipede.plugins.tests.unit.test_rally import assert_called_once
 
 
@@ -17,3 +17,21 @@ def test_get_ticket(get_ticket_from_issue, github_lib):
         get_ticket_from_issue,
         (github_lib.return_value.issues.show.return_value,), {})
     assert_equal(get_ticket_from_issue.return_value, ret)
+
+
+@patch('centipede.plugins.github.Ticket')
+def test_get_ticket_from_issue(ticket):
+    issue = Mock(['body', 'number', 'state', 'title'])
+    issue.body = 'MockBody'
+    issue.number = 123
+    issue.state = 'MockState'
+    issue.title = 'MockTitle'
+    ret = get_ticket_from_issue(issue)
+    assert_called_once(ticket, (), {
+        'identifier': 123,
+        'description': 'MockBody',
+        'title': 'MockTitle',
+        'owner': None,
+        'state': 'MockState',
+    })
+    assert_equal(ticket.return_value, ret)
