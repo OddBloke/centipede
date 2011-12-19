@@ -10,3 +10,9 @@ class TrackerInterface(object):
 
     def get(self, ticket_id):
         raise NotImplementedError()
+
+    def list(self, parent=None):
+        raise NotImplementedError()
+
+    def get_children(self):
+        raise NotImplementedError()
