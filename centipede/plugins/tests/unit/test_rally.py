@@ -95,3 +95,16 @@ def test_list_children_entity_with_both(api_client,
     ret = rally.list_children('us123')
     assert_called_once(get_entity_by_name, ('us123',))
     assert_equal(set([101, 102, 103, 104, 105, 106]), set(ret))
+
+
+@patch('centipede.plugins.rally.get_ticket_from_rally_object')
+@patch('centipede.plugins.rally.RallyAPIClient')
+def test_list_children_defect(api_client, get_ticket_from_rally_object):
+    rally = Rally()
+    get_ticket_from_rally_object.side_effect = lambda x: x + 100
+    get_entity_by_name = api_client.return_value.get_entity_by_name
+    get_entity_by_name.return_value = Mock(['tasks'])
+    get_entity_by_name.return_value.tasks = []
+    ret = rally.list_children('de123')
+    assert_called_once(get_entity_by_name, ('de123',))
+    assert_equal([], ret)
