@@ -1,7 +1,7 @@
 from pyrally import RallyAPIClient, settings as rally_settings
 
-from centipede.models import Ticket
 from centipede.tracker import TrackerInterface
+from centipede.tracker.entities import Ticket
 
 
 def get_ticket_from_rally_object(rally_obj):
