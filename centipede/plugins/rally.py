@@ -19,8 +19,15 @@ def get_ticket_from_rally_object(rally_obj):
 
 class Rally(TrackerInterface):
 
+    def __init__(self):
+        self.client = RallyAPIClient(rally_settings.RALLY_USERNAME,
+                                     rally_settings.RALLY_PASSWORD)
+
     def get_ticket(self, ticket_id):
-        client = RallyAPIClient(rally_settings.RALLY_USERNAME,
-                                rally_settings.RALLY_PASSWORD)
-        story = client.get_entity_by_name(ticket_id)
-        return get_ticket_from_rally_object(story)
+        ticket = self.client.get_entity_by_name(ticket_id)
+        return get_ticket_from_rally_object(ticket)
+
+    def list_children(self, ticket_id):
+        ticket = self.client.get_entity_by_name(ticket_id)
+        return [get_ticket_from_rally_object(child)
+                    for child in ticket.children]
