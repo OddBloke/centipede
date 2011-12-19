@@ -19,7 +19,7 @@ def assert_called_once(mock_obj, expected_args=None, expected_kwargs=None):
 def test_get_ticket_from_rally_object(ticket):
     mock_rally_obj = Mock()
     mock_rally_obj.Description = 'MockDescription'
-    mock_rally_obj.name = 'MockTitle'
+    mock_rally_obj.Name = 'MockTitle'
     mock_rally_obj.Owner.DisplayName = 'Mock User'
     mock_rally_obj.ScheduleState = 'Completed'
     ret = get_ticket_from_rally_object(mock_rally_obj)
