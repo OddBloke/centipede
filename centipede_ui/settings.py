@@ -1,4 +1,7 @@
 # Django settings for ui project.
+import os
+
+PROJECT_ROOT = os.getcwd()
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -85,12 +88,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'ui.urls'
+ROOT_URLCONF = 'centipede_ui.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -101,7 +105,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
-    'ui.tickets',
+    'centipede_ui.tickets',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -128,3 +132,6 @@ LOGGING = {
         },
     }
 }
+
+
+CENTIPEDE_URL = ''
