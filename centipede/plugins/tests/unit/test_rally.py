@@ -46,8 +46,8 @@ def test_get_ticket_from_rally_object_no_owner(ticket):
 def test_rally_get(api_client, get_ticket_from_rally_object):
     rally = Rally()
     ret = rally.get('us123')
-    get_story_by_name = api_client.return_value.get_story_by_name
-    assert_called_once(get_story_by_name, ('us123',))
+    get_entity_by_name = api_client.return_value.get_entity_by_name
+    assert_called_once(get_entity_by_name, ('us123',))
     assert_called_once(get_ticket_from_rally_object,
-                       (get_story_by_name.return_value,))
+                       (get_entity_by_name.return_value,))
     assert_equal(get_ticket_from_rally_object.return_value, ret)
