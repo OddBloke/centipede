@@ -32,6 +32,15 @@ def test_get_ticket_from_rally_object(ticket):
     assert_equal(ret, ticket.return_value)
 
 
+@patch('centipede.plugins.rally.Ticket')
+def test_get_ticket_from_rally_object_no_owner(ticket):
+    mock_rally_obj = Mock()
+    mock_rally_obj.Owner = None
+    get_ticket_from_rally_object(mock_rally_obj)
+    assert_equal(1, ticket.call_count)
+    assert_equal(None, ticket.call_args[1]['owner'])
+
+
 @patch('centipede.plugins.rally.get_ticket_from_rally_object')
 @patch('centipede.plugins.rally.RallyAPIClient')
 def test_rally_get(api_client, get_ticket_from_rally_object):
