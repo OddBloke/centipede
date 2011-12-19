@@ -8,7 +8,7 @@ def get_ticket_from_rally_object(rally_obj):
     return Ticket(
             description=rally_obj.Description,
             title=rally_obj.name,
-            owner=rally_obj.user.DisplayName,
+            owner=rally_obj.Owner.DisplayName,
             state=rally_obj.ScheduleState,
         )
 
