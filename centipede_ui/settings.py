@@ -128,3 +128,6 @@ LOGGING = {
         },
     }
 }
+
+
+CENTIPEDE_URL = ''
