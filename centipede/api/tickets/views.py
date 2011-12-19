@@ -15,7 +15,7 @@ class TicketView(View):
         return anyjson.serialize(data)
 
     def get(self, request, ticket_id):
-        ticket = tracker.get(ticket_id)
+        ticket = tracker.get_ticket(ticket_id)
         data = dict(
             title=ticket.title,
             description=ticket.description,
