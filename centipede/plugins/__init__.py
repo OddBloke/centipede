@@ -1,4 +1,4 @@
 class PluginInterface(object):
 
-    def get(self, id):
+    def get(self, ticket_id):
         raise NotImplementedError()
