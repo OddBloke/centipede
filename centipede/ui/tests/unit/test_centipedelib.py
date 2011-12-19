@@ -4,8 +4,8 @@ from nose.tools import assert_equal
 from centipede.ui.centipedelib import Centipede
 
 
-@patch('ui.centipedelib.json.loads')
-@patch('ui.centipedelib.requests.get')
+@patch('centipede.ui.centipedelib.json.loads')
+@patch('centipede.ui.centipedelib.requests.get')
 def test_get_ticket(get, loads):
     centipede = Centipede('http://centipede')
     ret = centipede.get_ticket('US123')
