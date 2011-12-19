@@ -8,11 +8,11 @@ def load_tracker(tracker_name):
 
 class TrackerInterface(object):
 
-    def get(self, ticket_id):
+    def get_ticket(self, ticket_id):
         raise NotImplementedError()
 
-    def list(self, parent=None):
+    def list_root(self):
         raise NotImplementedError()
 
-    def get_children(self):
+    def list_children(self, ticket_id):
         raise NotImplementedError()

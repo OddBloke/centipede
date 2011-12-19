@@ -9,6 +9,7 @@ def get_ticket_from_rally_object(rally_obj):
     if owner is not None:
         owner = owner.DisplayName
     return Ticket(
+            identifier=rally_obj.FormatedId,
             description=rally_obj.Description,
             title=rally_obj.Name,
             owner=owner,
@@ -18,7 +19,7 @@ def get_ticket_from_rally_object(rally_obj):
 
 class Rally(TrackerInterface):
 
-    def get(self, ticket_id):
+    def get_ticket(self, ticket_id):
         client = RallyAPIClient(rally_settings.RALLY_USERNAME,
                                 rally_settings.RALLY_PASSWORD)
         story = client.get_story_by_name(ticket_id)

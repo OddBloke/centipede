@@ -43,9 +43,9 @@ def test_get_ticket_from_rally_object_no_owner(ticket):
 
 @patch('centipede.plugins.rally.get_ticket_from_rally_object')
 @patch('centipede.plugins.rally.RallyAPIClient')
-def test_rally_get(api_client, get_ticket_from_rally_object):
+def test_rally_get_ticket(api_client, get_ticket_from_rally_object):
     rally = Rally()
-    ret = rally.get('us123')
+    ret = rally.get_ticket('us123')
     get_story_by_name = api_client.return_value.get_story_by_name
     assert_called_once(get_story_by_name, ('us123',))
     assert_called_once(get_ticket_from_rally_object,
