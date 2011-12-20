@@ -15,6 +15,7 @@ def test_view_ticket(centipede, render_to_response):
         'description': 'MockDescription',
         'owner': 'MockOwner',
         'state': 'MockState',
+        'identifier': 'MockIdentifier',
         }
     centipede.return_value.get_ticket.return_value = ticket_dict
     child_list = ['child1', 'child2']

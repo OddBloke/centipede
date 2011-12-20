@@ -11,6 +11,7 @@ def _get_ticket(prefix):
         'description': '{0} Description'.format(prefix),
         'owner': '{0} Owner'.format(prefix),
         'state': '{0} State'.format(prefix),
+        'identifier': '{0} Identifier'.format(prefix),
     }
 
 
@@ -36,11 +37,12 @@ def test_view_ticket(get):
     response = c.get('/tickets/view/US123/')
     assert_equal(200, response.status_code)
     for string in ['Test Title', 'Test Description', 'Test Owner',
-                   'Test State']:
+                   'Test State', 'Test Identifier']:
         assert_true(string in response.content,
                         '"{0}" not on page'.format(string))
     for prefix in ['Child', 'Child2']:
-        for string in ['{0} Title', '{0} Owner', '{0} State']:
+        for string in ['{0} Title', '{0} Owner', '{0} State',
+                       '{0} Identifier']:
             expected = string.format(prefix)
             assert_true(expected in response.content,
                             '"{0}" not on page'.format(expected))

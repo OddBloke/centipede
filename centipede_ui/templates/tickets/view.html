@@ -48,19 +48,21 @@
   </head>
   <body>
     <div id="content">
-        <h1>{{ title }}</h1>
+        <h1>{{ identifier }}: {{ title }}</h1>
         <h3>Owned by: <strong>{{ owner }}</strong></h3>
         <h3>State: <strong>{{ state }}</strong></h3>
         <p>{{ description }}</p>
         {% if children %}
             <table>
                 <tr>
+                    <th></th>
                     <th>Title</th>
                     <th>Owner</th>
                     <th>State</th>
                 </tr>
                 {% for child in children %}
                     <tr>
+                        <td>{{ child.identifier }}</td>
                         <td>{{ child.title }}</td>
                         <td>{{ child.owner }}</td>
                         <td>{{ child.state }}</td>
