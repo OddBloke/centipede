@@ -8,12 +8,16 @@ def get_ticket_from_rally_object(rally_obj):
     owner = rally_obj.Owner
     if owner is not None:
         owner = owner.DisplayName
+    try:
+        state = rally_obj.ScheduleState
+    except AttributeError:
+        state = rally_obj.State
     return Ticket(
             identifier=rally_obj.FormattedID,
             description=rally_obj.Description,
             title=rally_obj.Name,
             owner=owner,
-            state=rally_obj.ScheduleState,
+            state=state,
         )
 
 
