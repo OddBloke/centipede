@@ -23,3 +23,9 @@ class GitHub(TrackerInterface):
         github_lib = client.Github()
         issue = github_lib.issues.show(self.repo, ticket_id)
         return get_ticket_from_issue(issue)
+
+
+class GitHubWithSettings(GitHub):
+
+    def __init__(self, settings):
+        self.repo = settings.GITHUB_REPO
