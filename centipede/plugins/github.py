@@ -27,6 +27,15 @@ class GitHub(TrackerInterface):
     def list_children(self, ticket_id):
         raise IAmSterile('GitHub does not support nested issues.')
 
+    def list_root(self):
+        github_lib = client.Github()
+        open_issues = github_lib.issues.list()
+        closed_issues = github_lib.issues.list(state='closed')
+        ret = []
+        for issue in open_issues + closed_issues:
+            ret.append(get_ticket_from_issue(issue))
+        return ret
+
 
 class GitHubWithSettings(GitHub):
 
