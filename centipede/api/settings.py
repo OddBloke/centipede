@@ -151,3 +151,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 TRACKER = 'centipede.plugins.rally.Rally'
 
 GITHUB_REPO = 'OddBloke/centipede'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
