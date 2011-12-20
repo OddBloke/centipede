@@ -15,3 +15,10 @@ class Ticket(object):
         self.title = title
         self.owner = owner
         self.state = state
+
+    def as_dict(self):
+        d = {}
+        for attribute in ['identifier', 'description', 'title', 'owner',
+                          'state']:
+            d[attribute] = getattr(self, attribute)
+        return d
