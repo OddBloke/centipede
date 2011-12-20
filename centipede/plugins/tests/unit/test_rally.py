@@ -144,8 +144,19 @@ def test_list_children_task(api_client, get_ticket_from_rally_object):
 @patch('centipede.plugins.rally.get_ticket_from_rally_object')
 @patch('centipede.plugins.rally.RallyAPIClient')
 def test_list_root(api_client, get_ticket_from_rally_object):
+    def _create_mock(n, testcase=False):
+        m = Mock()
+        m.num = n
+        if testcase:
+            m._type = 'TestCase'
+        return m
     rally = Rally()
-    get_ticket_from_rally_object.side_effect = lambda x: x + 100
-    api_client.return_value.get_all_entities.return_value = [1, 3, 5]
+    get_ticket_from_rally_object.side_effect = lambda x: x.num + 100
+    api_client.return_value.get_all_entities.return_value = [
+            _create_mock(1),
+            _create_mock(2, True),
+            _create_mock(3),
+            _create_mock(4, True),
+            _create_mock(5)]
     ret = rally.list_root()
     assert_equal([101, 103, 105], ret)
