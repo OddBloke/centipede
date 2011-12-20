@@ -38,3 +38,7 @@ class Rally(TrackerInterface):
             children = []
         tasks = [get_ticket_from_rally_object(task) for task in ticket.tasks]
         return children + tasks
+
+    def list_root(self):
+        entities = self.client.get_all_entities()
+        return [get_ticket_from_rally_object(entity) for entity in entities]
