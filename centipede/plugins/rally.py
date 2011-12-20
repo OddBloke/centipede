@@ -45,4 +45,5 @@ class Rally(TrackerInterface):
 
     def list_root(self):
         entities = self.client.get_all_entities()
-        return [get_ticket_from_rally_object(entity) for entity in entities]
+        return [get_ticket_from_rally_object(entity) for entity in entities
+                    if entity._type != 'TestCase']
