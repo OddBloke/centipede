@@ -19,7 +19,7 @@ def get_ticket_from_rally_object(rally_obj):
 
 class Rally(TrackerInterface):
 
-    def __init__(self):
+    def __init__(self, settings=None):
         self.client = RallyAPIClient(rally_settings.RALLY_USERNAME,
                                      rally_settings.RALLY_PASSWORD)
 
