@@ -148,4 +148,6 @@ LOGGING = {
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-TRACKER = 'centipede.plugins.rally.Rally'
+TRACKER = 'centipede.plugins.github.GitHubWithSettings'
+
+GITHUB_REPO = 'OddBloke/centipede'
