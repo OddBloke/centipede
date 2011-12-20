@@ -120,3 +120,13 @@ def test_list_children_task(api_client, get_ticket_from_rally_object):
     get_entity_by_name.return_value = Mock([])
     assert_raises(IAmSterile, rally.list_children, 'ta123')
     assert_called_once(get_entity_by_name, ('ta123',))
+
+
+@patch('centipede.plugins.rally.get_ticket_from_rally_object')
+@patch('centipede.plugins.rally.RallyAPIClient')
+def test_list_root(api_client, get_ticket_from_rally_object):
+    rally = Rally()
+    get_ticket_from_rally_object.side_effect = lambda x: x + 100
+    api_client.return_value.get_all_entities.return_value = [1, 3, 5]
+    ret = rally.list_root()
+    assert_equal([101, 103, 105], ret)
