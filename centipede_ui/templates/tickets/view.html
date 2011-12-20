@@ -49,6 +49,22 @@
         <h3>Owned by: <strong>{{ owner }}</strong></h3>
         <h3>State: <strong>{{ state }}</strong></h3>
         <p>{{ description }}</p>
+        {% if children %}
+            <table>
+                <tr>
+                    <th>Title</td>
+                    <th>Owner</td>
+                    <th>State</td>
+                </tr>
+                {% for child in children %}
+                    <tr>
+                        <td>{{ child.title }}</td>
+                        <td>{{ child.owner }}</td>
+                        <td>{{ child.state }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
     </div>
   </body>
 </html>
