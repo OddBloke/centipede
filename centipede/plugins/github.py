@@ -1,7 +1,7 @@
 from github2 import client
 
 from centipede.tracker import TrackerInterface
-from centipede.tracker.entities import Ticket
+from centipede.tracker.entities import IAmSterile, Ticket
 
 
 def get_ticket_from_issue(issue):
@@ -23,6 +23,9 @@ class GitHub(TrackerInterface):
         github_lib = client.Github()
         issue = github_lib.issues.show(self.repo, ticket_id)
         return get_ticket_from_issue(issue)
+
+    def list_children(self, ticket_id):
+        raise IAmSterile('GitHub does not support nested issues.')
 
 
 class GitHubWithSettings(GitHub):

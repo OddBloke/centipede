@@ -1,5 +1,5 @@
 from mock import Mock, patch
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_raises
 
 from centipede.plugins.github import (
     get_ticket_from_issue,
@@ -7,6 +7,7 @@ from centipede.plugins.github import (
     GitHubWithSettings,
 )
 from centipede.plugins.tests.unit.test_rally import assert_called_once
+from centipede.tracker.entities import IAmSterile
 
 
 @patch('centipede.plugins.github.client.Github')
@@ -21,6 +22,11 @@ def test_get_ticket(get_ticket_from_issue, github_lib):
         get_ticket_from_issue,
         (github_lib.return_value.issues.show.return_value,), {})
     assert_equal(get_ticket_from_issue.return_value, ret)
+
+
+def test_list_children():
+    github = GitHub('')
+    assert_raises(IAmSterile, github.list_children, '2')
 
 
 @patch('centipede.plugins.github.Ticket')
