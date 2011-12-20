@@ -19,4 +19,12 @@ class Centipede(object):
     def get_ticket_children(self, ticket_id):
         response = requests.get(urljoin(self.url, 'tickets', ticket_id,
                                         'tickets'))
-        return json.loads(response.content)
+        if response.status_code == 200:
+            return json.loads(response.content)
+        elif response.status_code == 404:
+            raise DeadbeatTicket(response)
+
+
+class DeadbeatTicket(Exception):
+    """Ticket does not support children."""
+    pass
