@@ -1,6 +1,54 @@
-<h1>{{ title }}</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="en-us" />
+    <title></title>
+    <style  type="text/css">
+        body {
+            font-family: Lato, Helvetica, Arial, sans-serif;
+            color: #005F6B;
+        }
+        #content {
+            width: 550px;
+        }
+        h1 {
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background-color: #00B4CC;
+            color: #fff;
+            margin: 12px 12px 0 12px;
+            padding: 12px;
+            font-weight: normal;
+            font-size: 32px;
+        }
+        h3 {
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 3px solid #ECF1F2;
+            margin: 12px 12px 0 12px;
+            padding: 12px;
+            font-weight: normal;
+            font-size: 18px;
+        }
+        p {
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background: #ECF1F2;
+            margin: 12px 12px 0 12px;
+            padding: 12px;
+            font-size: 18px;
+        }
 
-<p><strong>Owned by: </strong>{{ owner }}</p>
-<p><strong>State: </strong>{{ state }}</p>
-
-<p>{{ description }}</p>
+    </style>
+  </head>
+  <body>
+    <div id="content">
+        <h1>{{ title }}</h1>
+        <h3>Owned by: <strong>{{ owner }}</strong></h3>
+        <h3>State: <strong>{{ state }}</strong></h3>
+        <p>{{ description }}</p>
+    </div>
+  </body>
+</html>
