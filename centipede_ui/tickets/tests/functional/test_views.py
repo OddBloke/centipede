@@ -35,9 +35,12 @@ def test_view_ticket(get):
     c = Client()
     response = c.get('/tickets/view/US123/')
     assert_equal(200, response.status_code)
-    for prefix in ['Test', 'Child', 'Child2']:
-        for string in ['{0} Title', '{0} Description', '{0} Owner',
-                       '{0} State']:
+    for string in ['Test Title', 'Test Description', 'Test Owner',
+                   'Test State']:
+        assert_true(string in response.content,
+                        '"{0}" not on page'.format(string))
+    for prefix in ['Child', 'Child2']:
+        for string in ['{0} Title', '{0} Owner', '{0} State']:
             expected = string.format(prefix)
             assert_true(expected in response.content,
                             '"{0}" not on page'.format(expected))
