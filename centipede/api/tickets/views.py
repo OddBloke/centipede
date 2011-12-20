@@ -19,9 +19,6 @@ class TicketChildView(View):
 
 class TicketView(View):
 
-    def serialize(self, data):
-        return anyjson.serialize(data)
-
     def get(self, request, ticket_id):
         ticket = tracker.get_ticket(ticket_id)
-        return HttpResponse(self.serialize(ticket.as_dict()))
+        return HttpResponse(anyjson.serialize(ticket.as_dict()))
