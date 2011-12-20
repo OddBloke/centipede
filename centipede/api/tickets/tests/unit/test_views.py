@@ -1,8 +1,8 @@
 from mock import Mock, patch
+from mock_helpers import assert_called_once
 from nose.tools import assert_equal
 
 from centipede.api.tickets.views import TicketChildView, TicketView
-from centipede.plugins.tests.unit.test_rally import assert_called_once
 from centipede.tracker.entities import IAmSterile
 
 

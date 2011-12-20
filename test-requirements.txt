@@ -1,3 +1,4 @@
 django-nose
 nose
 mock
+mock_helpers

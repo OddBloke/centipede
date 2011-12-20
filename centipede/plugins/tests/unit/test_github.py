@@ -1,4 +1,5 @@
 from mock import Mock, patch
+from mock_helpers import assert_called_once, MultiReturn
 from nose.tools import assert_equal, assert_raises, assert_true
 
 from centipede.plugins.github import (
@@ -6,7 +7,6 @@ from centipede.plugins.github import (
     GitHub,
     GitHubWithSettings,
 )
-from centipede.plugins.tests.unit.test_rally import assert_called_once
 from centipede.tracker.entities import IAmSterile
 
 
@@ -27,15 +27,6 @@ def test_get_ticket(get_ticket_from_issue, github_lib):
 def test_list_children():
     github = GitHub('')
     assert_raises(IAmSterile, github.list_children, '2')
-
-
-class MultiReturn(object):
-
-    def __init__(self, returns):
-        self.returns = returns
-
-    def side_effect(self, *args, **kwargs):
-        return self.returns.pop(0)
 
 
 @patch('centipede.plugins.github.client.Github')
