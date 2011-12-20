@@ -17,7 +17,8 @@ class TicketChildView(View):
             [dict(title=ticket.title,
                   description=ticket.description,
                   state=ticket.state,
-                  owner=ticket.owner)
+                  owner=ticket.owner,
+                  identifier=ticket.identifier)
                 for ticket in children]))
 
 
@@ -32,5 +33,6 @@ class TicketView(View):
             title=ticket.title,
             description=ticket.description,
             state=ticket.state,
-            owner=ticket.owner)
+            owner=ticket.owner,
+            identifier=ticket.identifier)
         return HttpResponse(self.serialize(data))
