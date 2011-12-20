@@ -7,4 +7,5 @@ from centipede_ui.centipedelib import Centipede
 def view_ticket(request, ticket_id):
     centipede = Centipede(settings.CENTIPEDE_URL)
     ticket_dict = centipede.get_ticket(ticket_id)
+    ticket_dict['children'] = centipede.get_ticket_children(ticket_id)
     return render_to_response('tickets/view.html', ticket_dict)
