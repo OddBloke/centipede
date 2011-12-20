@@ -20,9 +20,11 @@ class Get(object):
     def __init__(self):
         ticket_mock = Mock()
         ticket_mock.content = json.dumps(_get_ticket('Test'))
+        ticket_mock.status_code = 200
         child_mock = Mock()
         child_mock.content = json.dumps([_get_ticket('Child'),
                                          _get_ticket('Child2')])
+        child_mock.status_code = 200
         self.mocks = [ticket_mock, child_mock]
 
     def side_effect(self, *args):
@@ -46,3 +48,19 @@ def test_view_ticket(get):
             expected = string.format(prefix)
             assert_true(expected in response.content,
                             '"{0}" not on page'.format(expected))
+
+
+@patch('centipede_ui.tickets.views.settings.CENTIPEDE_URL', 'http://centipede')
+@patch('centipede_ui.centipedelib.requests.get')
+def test_view_ticket_no_subtickets(get):
+    get_mock = Get()
+    get_mock.mocks[1].status_code = 404
+    get_mock.mocks[1].content = ''
+    get.side_effect = get_mock.side_effect
+    c = Client()
+    response = c.get('/tickets/view/US123/')
+    assert_equal(200, response.status_code)
+    for string in ['Test Title', 'Test Description', 'Test Owner',
+                   'Test State', 'Test Identifier']:
+        assert_true(string in response.content,
+                        '"{0}" not on page'.format(string))
