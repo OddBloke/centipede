@@ -14,12 +14,7 @@ class TicketChildView(View):
     def get(self, request, ticket_id):
         children = tracker.list_children(ticket_id)
         return HttpResponse(anyjson.serialize(
-            [dict(title=ticket.title,
-                  description=ticket.description,
-                  state=ticket.state,
-                  owner=ticket.owner,
-                  identifier=ticket.identifier)
-                for ticket in children]))
+            [ticket.as_dict() for ticket in children]))
 
 
 class TicketView(View):
@@ -29,10 +24,4 @@ class TicketView(View):
 
     def get(self, request, ticket_id):
         ticket = tracker.get_ticket(ticket_id)
-        data = dict(
-            title=ticket.title,
-            description=ticket.description,
-            state=ticket.state,
-            owner=ticket.owner,
-            identifier=ticket.identifier)
-        return HttpResponse(self.serialize(data))
+        return HttpResponse(self.serialize(ticket.as_dict()))
