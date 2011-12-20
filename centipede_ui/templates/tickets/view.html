@@ -62,7 +62,7 @@
                 </tr>
                 {% for child in children %}
                     <tr>
-                        <td>{{ child.identifier }}</td>
+                        <td><a href="{% url view_ticket child.identifier %}">{{ child.identifier }}</a></td>
                         <td>{{ child.title }}</td>
                         <td>{{ child.owner }}</td>
                         <td>{{ child.state }}</td>
