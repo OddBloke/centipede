@@ -1,7 +1,11 @@
 from mock import Mock, patch
 from nose.tools import assert_equal
 
-from centipede.plugins.github import get_ticket_from_issue, GitHub
+from centipede.plugins.github import (
+    get_ticket_from_issue,
+    GitHub,
+    GitHubWithSettings,
+)
 from centipede.plugins.tests.unit.test_rally import assert_called_once
 
 
@@ -35,3 +39,10 @@ def test_get_ticket_from_issue(ticket):
         'state': 'MockState',
     })
     assert_equal(ticket.return_value, ret)
+
+
+def test_github_with_settings():
+    settings = Mock()
+    settings.GITHUB_REPO = 'MockRepo'
+    gh = GitHubWithSettings(settings)
+    assert_equal('MockRepo', gh.repo)
