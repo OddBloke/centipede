@@ -1,4 +1,3 @@
 django-nose
 nose
 mock
-django_nose
